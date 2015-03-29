@@ -188,7 +188,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>votebook</finalName>
+		<finalName>vote-no-livro</finalName>
 	</build>
 	<!-- http://devcrumb.com/hibernate/hibernate-jpa-spring-and-hsqldb -->
 </project>
