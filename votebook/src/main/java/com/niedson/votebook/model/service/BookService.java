@@ -18,8 +18,8 @@ public class BookService {
 	private BookDAO bookDAO;
 	
 	@Autowired
-	public BookService(BookDAO mapsDAO) {
-		this.bookDAO = mapsDAO;
+	public BookService(BookDAO bookDAO) {
+		this.bookDAO = bookDAO;
 	}
 	
 	public Book save(Book book){

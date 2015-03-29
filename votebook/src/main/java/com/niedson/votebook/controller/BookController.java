@@ -1,7 +1,11 @@
 package com.niedson.votebook.controller;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 import org.junit.runner.Request;
 import org.slf4j.Logger;
@@ -13,7 +17,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niedson.votebook.controller.uri.ProjectURIConstants;
 import com.niedson.votebook.model.service.BookService;
+import com.niedson.votebook.model.service.VoteBookHistService;
 import com.niedson.votebook.persistence.entity.Book;
+import com.niedson.votebook.persistence.entity.VoteBookHist;
+import com.niedson.votebook.to.BookListId;
 
 @Controller
 @RequestMapping(value=ProjectURIConstants.BookController.PREFIX_MAPPING)
@@ -22,30 +29,76 @@ public class BookController {
 	private Logger logger = LoggerFactory.getLogger(BookController.class);
 	 
 	private BookService bookService;
+	private VoteBookHistService voteBookHistService;
 	
 	@Autowired 
-	public BookController(BookService bookService) {
+	public BookController(BookService bookService, VoteBookHistService voteBookHistService) {
 		this.bookService = bookService;
+		this.voteBookHistService = voteBookHistService;
 	}
 	
 	@RequestMapping(value=ProjectURIConstants.BookController.CHOOSE_BOOK)
-	public ModelAndView voteNoLivro(){
+	public ModelAndView voteNoLivro(HttpServletRequest request){
 		
 		Random gerador = new Random();
 		
-		List<Book> bookList = bookService.listAll();
-		int id = gerador.nextInt( bookList.size());
-		Book book1 = bookList.remove(id);
+		System.out.println("voteBookHistId" + request.getParameter("voteBookHistId"));
+		System.out.println("selectedBookId" + request.getParameter("selectedBookId"));
 		
-		id = gerador.nextInt( bookList.size());
-		Book book2 = bookList.remove(id);
+		List<BookListId> bookListProbabilitySession = (List<BookListId>) request.getSession().getAttribute("bookListProbability");
+		VoteBookHist voteBookHistSession = voteBookHistService.get((Long) request.getSession().getAttribute("voteBookHistId"));
 		
-		List<Book> selectedBooks = new ArrayList<Book>();
-		selectedBooks.add(book1);
-		selectedBooks.add(book2);
+		if (!(voteBookHistSession == null)) {
+			voteBookHistSession.setChoosedBook(Long.getLong(request.getParameter("selectedBookId")));
+			voteBookHistSession.setDateHourVote(new Date());
+			voteBookHistService.update(voteBookHistSession);
+		}
 		
-				
-		return new ModelAndView("book/choose", "bookList", selectedBooks);
+		List<VoteBookHist> listAll = voteBookHistService.listAll();
+		
+		for (VoteBookHist voteBookHist : listAll) {
+			System.out.println(voteBookHist.getId() + " | " + voteBookHist.getBook1() + " | " + voteBookHist.getBook2());
+		}
+		
+		List<BookListId> bookListProbability = new ArrayList<BookListId>();
+		
+		if (bookListProbabilitySession == null) {
+			List<Book> bookList = bookService.listAll();
+			while (bookList.size() > 1) {
+				Book book = bookList.remove(0);
+				for (Book bookInList : bookList) {
+					BookListId bookListId = new BookListId(book.getId(), bookInList.getId());
+					bookListProbability.add(bookListId);
+				}
+			}
+		} else {
+			bookListProbability = bookListProbabilitySession;
+		}
+		
+		if (bookListProbability.size() == 0) {
+			request.getSession().removeAttribute("bookListProbability");
+			
+			return new ModelAndView("redirect:/user/register", "asdsads", null);
+		} else {
+			
+			int index = gerador.nextInt( bookListProbability.size());
+			BookListId  bookListProbabilityChosed = bookListProbability.remove(index);
+			
+			List<Book> selectedBooks = new ArrayList<Book>();
+			Long firstBookId = bookListProbabilityChosed.getFirstBookId();
+			Long secondBookId = bookListProbabilityChosed.getSecondBookId();
+
+			selectedBooks.add(bookService.get(firstBookId));
+			selectedBooks.add(bookService.get(secondBookId));
+			
+			VoteBookHist voteBookHist = voteBookHistService.save(new VoteBookHist(firstBookId, secondBookId, 
+					null, new Date(), null));
+			
+			request.getSession().setAttribute("bookListProbability", bookListProbability);
+			request.getSession().setAttribute("voteBookHist", voteBookHist);
+			
+			return new ModelAndView("book/choose", "bookList", selectedBooks);
+		}
 	}
 	
 	
