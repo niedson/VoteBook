@@ -1,20 +1,41 @@
 package com.niedson.votebook.model.service;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.niedson.votebook.persistence.dao.BookDAO;
+import com.niedson.votebook.persistence.entity.Book;
+
 @Service
-public class DeliveryService {
+public class BookService {
 	
-//	private static final Logger logger = LoggerFactory.getLogger(DeliveryService.class);
-//	
-//	private MapsDAO mapsDAO;
-//	private MapLocationDAO mapLocationDAO;
-//	
-//	@Autowired
-//	public DeliveryService(MapsDAO mapsDAO, MapLocationDAO mapLocationDAO) {
-//		this.mapsDAO = mapsDAO;
-//		this.mapLocationDAO = mapLocationDAO;
-//	}
+	private static final Logger logger = LoggerFactory.getLogger(BookService.class);
+	
+	private BookDAO bookDAO;
+	
+	@Autowired
+	public BookService(BookDAO mapsDAO) {
+		this.bookDAO = mapsDAO;
+	}
+	
+	public Book save(Book book){
+		Book savedBook  = bookDAO.save(book);
+		return savedBook;
+	}
+	
+	public List<Book> listAll(){
+		return bookDAO.listAll();
+	}
+	
+	public Book get(Long id) {
+		return bookDAO.get(id);
+	}
+	
+	
 //	
 //	public void addLocationToMap(String mapName, String locationA, String locationB, Integer cost){
 //		logger.debug("params: [mapName:{},locationA:{},locationB:{},cost:{}]", mapName, locationA, locationB, cost);

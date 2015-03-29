@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niedson.votebook.controller.uri.ProjectURIConstants;
 import com.niedson.votebook.model.exception.DeliveryException;
-import com.niedson.votebook.model.service.DeliveryService;
+import com.niedson.votebook.model.service.BookService;
 
 @RestController
-@RequestMapping(value=ProjectURIConstants.DeliveryRestController.PREFIX_MAPPING)
+@RequestMapping(value=ProjectURIConstants.BookController.PREFIX_MAPPING)
 public class DeliveryRestController {
 
 //	private static final Logger logger = LoggerFactory.getLogger(DeliveryRestController.class);

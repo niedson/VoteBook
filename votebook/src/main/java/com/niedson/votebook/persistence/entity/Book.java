@@ -10,7 +10,7 @@ public class Book {
 	@Id @GeneratedValue
 	private Long id;
 	
-	private String name;
+	private String name, author, image;
 	
 	/* Getters and Setters */
 
@@ -26,4 +26,17 @@ public class Book {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
 }

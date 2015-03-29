@@ -1,41 +1,53 @@
 package com.niedson.votebook.controller;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import org.apache.log4j.Logger;
+import org.junit.runner.Request;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.niedson.votebook.controller.uri.ProjectURIConstants;
+import com.niedson.votebook.model.service.BookService;
+import com.niedson.votebook.persistence.entity.Book;
+
 @Controller
+@RequestMapping(value=ProjectURIConstants.BookController.PREFIX_MAPPING)
 public class BookController {
 	
-	protected static Logger logger = Logger.getLogger("LivroController");
+	private Logger logger = LoggerFactory.getLogger(BookController.class);
 	 
-//	private LivroService livroService;
+	private BookService bookService;
 	
-//	@Autowired 
-//	public LivroController(LivroService livroService) {
-//		this.livroService = livroService;
-//	}
+	@Autowired 
+	public BookController(BookService bookService) {
+		this.bookService = bookService;
+	}
 	
-	@RequestMapping("/")
+	@RequestMapping(value=ProjectURIConstants.BookController.CHOOSE_BOOK)
 	public ModelAndView voteNoLivro(){
 		
-		logger.info("entering context()");
+		Random gerador = new Random();
 		
-		System.out.println("asds");
+		List<Book> bookList = bookService.listAll();
+		int id = gerador.nextInt( bookList.size());
+		Book book1 = bookList.remove(id);
 		
-//		this.livroService = new LivroService();
-//		
-//		Livro livro = new Livro("Livro 1", "autor 1", "sinopse 1", "Idioma 1", 1999);
+		id = gerador.nextInt( bookList.size());
+		Book book2 = bookList.remove(id);
 		
-//		livroService.addLivro(livro);
-//		
-//		List<Livro> listaLivro = livroService.getAllLivros();
-//		
-//		System.out.println("asdasd");
-//		
+		List<Book> selectedBooks = new ArrayList<Book>();
+		selectedBooks.add(book1);
+		selectedBooks.add(book2);
 		
-		return new ModelAndView("chooseBook", "mensagem", null);
+				
+		return new ModelAndView("book/choose", "bookList", selectedBooks);
 	}
-
+	
+	
+	
 }

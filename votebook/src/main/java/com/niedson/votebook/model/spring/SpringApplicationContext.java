@@ -3,7 +3,7 @@ package com.niedson.votebook.model.spring;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.niedson.votebook.model.service.DeliveryService;
+import com.niedson.votebook.model.service.BookService;
 import com.niedson.votebook.persistence.dao.BookDAO;
 
 
@@ -26,8 +26,8 @@ public class SpringApplicationContext {
 	public class Service{
 		private Service(){}
 		
-		public DeliveryService getDeliveryService(){
-			return context.getBean("deliveryService", DeliveryService.class);
+		public BookService getDeliveryService(){
+			return context.getBean("deliveryService", BookService.class);
 		}
 	}
 	

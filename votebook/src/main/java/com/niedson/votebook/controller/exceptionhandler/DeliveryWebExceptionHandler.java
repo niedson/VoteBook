@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.niedson.votebook.model.exception.DeliveryException;
-import com.niedson.votebook.model.service.DeliveryService;
+import com.niedson.votebook.model.service.BookService;
 
 @ControllerAdvice
 public class DeliveryWebExceptionHandler {
 	
-	private static final Logger logger = LoggerFactory.getLogger(DeliveryService.class);
+	private static final Logger logger = LoggerFactory.getLogger(BookService.class);
 	
 	@ResponseStatus(value=HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(DeliveryException.class)

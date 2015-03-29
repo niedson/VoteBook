@@ -6,7 +6,8 @@ import com.niedson.votebook.persistence.entity.Book;
 
 public interface BookDAO {
 	
-	public Long save(Book book);
+	public Book save(Book book);
     public List<Book> listAll();
-
+    public Book get(Long id);
+    
 }
