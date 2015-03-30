@@ -10,5 +10,6 @@ public interface VoteBookHistDAO {
     public List<VoteBookHist> listAll();
     public VoteBookHist get(Long id);
     public VoteBookHist update(VoteBookHist voteBookHist);
+    public VoteBookHist findBySessionId(String sessionId);
     
 }

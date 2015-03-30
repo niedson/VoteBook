@@ -29,15 +29,7 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
 	public VoteBookHist update(VoteBookHist voteBookHist) {
 		
 		VoteBookHist voteBookHistEm = em.find(VoteBookHist.class, voteBookHist.getId());
-		
 		em.merge(voteBookHist);
-//		em.getTransaction().begin();
-//		voteBookHistEm.setBook1(voteBookHist.getBook1());
-//		voteBookHistEm.setBook2(voteBookHist.getBook2());
-//		voteBookHistEm.setChoosedBook(voteBookHist.getChoosedBook());
-//		voteBookHistEm.setDateHourVote(voteBookHist.getDateHourVote());
-//		voteBookHistEm.setSessionId(voteBookHist.getSessionId());
-//		em.getTransaction().commit();
 		
 		return voteBookHistEm;
 	}
@@ -54,6 +46,15 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
             return null;
         }
     	
+    }
+    
+    public VoteBookHist findBySessionId(String sessionId) {
+    	try{
+    		VoteBookHist result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.sessionId = '" + sessionId + "'", VoteBookHist.class).getSingleResult();
+    		return result;
+    	} catch(NoResultException e) {
+    		return null;
+    	}
     }
 	
 }

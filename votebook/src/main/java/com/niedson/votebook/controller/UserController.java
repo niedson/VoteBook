@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niedson.votebook.controller.uri.ProjectURIConstants;
 import com.niedson.votebook.model.service.BookService;
+import com.niedson.votebook.model.service.UserService;
 import com.niedson.votebook.persistence.entity.Book;
 import com.niedson.votebook.to.BookListId;
 
@@ -24,15 +25,20 @@ public class UserController {
 	
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	 
-	private BookService bookService;
+	private UserService userService;
 	
 	@Autowired 
-	public UserController(BookService bookService) {
-		this.bookService = bookService;
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 	
 	@RequestMapping(value=ProjectURIConstants.UserController.REGISTER)
-	public ModelAndView voteNoLivro(HttpServletRequest request){
+	public ModelAndView register(HttpServletRequest request){
+		return new ModelAndView("/user/register", "bookList", null);
+	}
+	
+	@RequestMapping(value=(ProjectURIConstants.UserController.REGISTER + "asd"))
+	public ModelAndView send(HttpServletRequest request){
 		return new ModelAndView("/user/register", "bookList", null);
 	}
 	

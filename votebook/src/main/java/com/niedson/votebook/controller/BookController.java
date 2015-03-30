@@ -38,12 +38,13 @@ public class BookController {
 	}
 	
 	@RequestMapping(value={ProjectURIConstants.BookController.CHOOSE_BOOK, "/"})
-	public ModelAndView voteNoLivro(HttpServletRequest request){
+	public ModelAndView voteBook(HttpServletRequest request){
 		
 		Random gerador = new Random();
 		
-		System.out.println("voteBookHistId" + request.getParameter("voteBookHistId"));
-		System.out.println("selectedBookId" + request.getParameter("selectedBookId"));
+		System.out.println("voteBookHistId: " + request.getParameter("voteBookHistId"));
+		System.out.println("selectedBookId: " + request.getParameter("selectedBookId"));
+		System.out.println("request.getSession().getId(): " + request.getSession().getId());
 		
 		long voteBookHistId = request.getParameter("voteBookHistId") == null ? 0 : Long.valueOf(request.getParameter("voteBookHistId"));
 		
@@ -101,7 +102,7 @@ public class BookController {
 			selectedBooks.add(bookService.get(secondBookId));
 			
 			VoteBookHist voteBookHist = voteBookHistService.save(new VoteBookHist(firstBookId, secondBookId, 
-					null, new Date(), null));
+					null, new Date(), request.getSession().getId()));
 			
 			request.getSession().setAttribute("bookListProbability", bookListProbability);
 			request.getSession().setAttribute("voteBookHist", voteBookHist);
@@ -109,7 +110,5 @@ public class BookController {
 			return new ModelAndView("book/choose", "bookList", selectedBooks);
 		}
 	}
-	
-	
 	
 }

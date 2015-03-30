@@ -38,4 +38,9 @@ public class VoteBookHistService {
 	public VoteBookHist update(VoteBookHist voteBookHist){
 		return voteBookHistDAO.update(voteBookHist);
 	}
+	
+	 public VoteBookHist findBySessionId(String sessionId){
+		 return voteBookHistDAO.findBySessionId(sessionId); 
+	 }
+	 
 }

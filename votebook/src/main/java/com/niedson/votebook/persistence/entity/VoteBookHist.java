@@ -18,6 +18,7 @@ public class VoteBookHist {
 	private Long choosedBook;
 	private Date dateHourVote;
 	private String sessionId;
+	private Long user;
 	
 	
 	public VoteBookHist(Long book1, Long book2, Long choosedBook,
@@ -68,5 +69,13 @@ public class VoteBookHist {
 	}
 	public void setChoosedBook(Long choosedBook) {
 		this.choosedBook = choosedBook;
+	}
+
+	public Long getUser() {
+		return user;
+	}
+
+	public void setUser(Long user) {
+		this.user = user;
 	}
 }
