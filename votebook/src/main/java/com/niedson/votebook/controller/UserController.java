@@ -17,6 +17,7 @@ import com.niedson.votebook.controller.uri.ProjectURIConstants;
 import com.niedson.votebook.model.service.BookService;
 import com.niedson.votebook.model.service.UserService;
 import com.niedson.votebook.persistence.entity.Book;
+import com.niedson.votebook.persistence.entity.User;
 import com.niedson.votebook.to.BookListId;
 
 @Controller
@@ -26,10 +27,12 @@ public class UserController {
 	private Logger logger = LoggerFactory.getLogger(UserController.class);
 	 
 	private UserService userService;
+	private BookService bookService;
 	
 	@Autowired 
-	public UserController(UserService userService) {
+	public UserController(UserService userService, BookService bookService) {
 		this.userService = userService;
+		this.bookService = bookService;
 	}
 	
 	@RequestMapping(value=ProjectURIConstants.UserController.REGISTER)
@@ -37,8 +40,14 @@ public class UserController {
 		return new ModelAndView("/user/register", "bookList", null);
 	}
 	
-	@RequestMapping(value=(ProjectURIConstants.UserController.REGISTER + "asd"))
+	@RequestMapping(value=ProjectURIConstants.UserController.SEND)
 	public ModelAndView send(HttpServletRequest request){
+		
+		User user = new User(request.getParameter("name"), request.getParameter("email"));
+		userService.save(user);
+		
+		List<User> listAll = userService.listAll();
+		
 		return new ModelAndView("/user/register", "bookList", null);
 	}
 	

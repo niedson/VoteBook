@@ -12,6 +12,14 @@ public class User {
 	
 	private String name, email;
 
+	public User() {}
+	
+	public User(String name, String email) {
+		super();
+		this.name = name;
+		this.email = email;
+	}
+
 	public Long getId() {
 		return id;
 	}
