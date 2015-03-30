@@ -39,7 +39,7 @@ public class VoteBookHistService {
 		return voteBookHistDAO.update(voteBookHist);
 	}
 	
-	 public VoteBookHist findBySessionId(String sessionId){
+	 public List<VoteBookHist> findBySessionId(String sessionId){
 		 return voteBookHistDAO.findBySessionId(sessionId); 
 	 }
 	 

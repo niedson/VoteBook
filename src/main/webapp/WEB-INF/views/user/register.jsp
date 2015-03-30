@@ -45,18 +45,20 @@
 	                <div class="col-sm-12 subscribe" style="height: 70%">
 	                    <h3>Cadastro</h3>
 	                    <p>Informe seu nome e email para entrar no ranking</p>
-	                    <form class="form-inline" role="form" action="http://azmind.com/wrapbootstrap/quadris-app-landing-page/v2-0/blue/assets/subscribe.php" method="post">
+	                    <form class="form-inline" role="form" action="send" method="post">
 							<div class="row">	                    
 			                	<div class="form-group">
 			                		<label class="sr-only" for="subscribe-email">Email address</label>
 			                    	<input type="text" name="email" placeholder="Email" class="subscribe-email" id="subscribe-email">
-			                    	<input type="text" name="email" placeholder="Nome" class="subscribe-email" id="subscribe-name">
+			                    	<input type="text" name="name" placeholder="Nome" class="subscribe-email" id="subscribe-name">
 			                    </div>
 			                    <br/>
 				            </div>
 				            <br/>
 		                    <div class="row">
-		                    	<button type="submit" class="btn">Enviar</button>
+		                    	<button type="submit" class="btn" >Enviar</button>
+		                    	
+		                    	
 		                    </div>
 		                </form>
 	                    <div class="success-message" style="display: none;"></div>
@@ -92,7 +94,5 @@
     <!--[if lt IE 10]>
         <script src="assets/js/placeholder.js"></script>
     <![endif]-->	
-	
-	</script>
 </body>
 </html>

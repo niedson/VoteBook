@@ -60,12 +60,12 @@
 			                		<img src="${pageContext.request.contextPath}/assets/images/livro-senhor-dos-aneis.jpg" alt="" style="-webkit-border-radius: initial;">
 			                		<div class="features-box-1-icon">
 			                		</div>
-				                </div>
 			                    <h4>${book.name}</h4>
 			                    <h5>${book.name}</h5>
 			                    <p>
 			                    	${book.author }
 			                    </p>
+				                </div>
 			                </div>
 						</c:forEach>
 		            	

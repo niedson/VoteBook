@@ -48,9 +48,10 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
     	
     }
     
-    public VoteBookHist findBySessionId(String sessionId) {
+    public List<VoteBookHist> findBySessionId(String sessionId) {
     	try{
-    		VoteBookHist result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.sessionId = '" + sessionId + "'", VoteBookHist.class).getSingleResult();
+    		List<VoteBookHist> result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.sessionId = '" + sessionId + "'", 
+    				VoteBookHist.class).getResultList();
     		return result;
     	} catch(NoResultException e) {
     		return null;
