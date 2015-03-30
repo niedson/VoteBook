@@ -37,7 +37,7 @@ public class BookController {
 		this.voteBookHistService = voteBookHistService;
 	}
 	
-	@RequestMapping(value=ProjectURIConstants.BookController.CHOOSE_BOOK)
+	@RequestMapping(value={ProjectURIConstants.BookController.CHOOSE_BOOK, "/"})
 	public ModelAndView voteNoLivro(HttpServletRequest request){
 		
 		Random gerador = new Random();
