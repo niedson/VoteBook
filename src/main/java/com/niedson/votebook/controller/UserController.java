@@ -1,11 +1,8 @@
 package com.niedson.votebook.controller;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.runner.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.niedson.votebook.controller.uri.ProjectURIConstants;
 import com.niedson.votebook.model.service.BookService;
 import com.niedson.votebook.model.service.UserService;
-import com.niedson.votebook.persistence.entity.Book;
 import com.niedson.votebook.persistence.entity.User;
-import com.niedson.votebook.to.BookListId;
 
 @Controller
 @RequestMapping(value=ProjectURIConstants.UserController.PREFIX_MAPPING)

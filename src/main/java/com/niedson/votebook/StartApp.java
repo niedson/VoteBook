@@ -1,9 +1,7 @@
 package com.niedson.votebook;
 
-import java.util.List;
 
 import com.niedson.votebook.model.spring.SpringApplicationContext;
-import com.niedson.votebook.persistence.dao.BookDAO;
 import com.niedson.votebook.persistence.entity.Book;
 
 	public class StartApp {
