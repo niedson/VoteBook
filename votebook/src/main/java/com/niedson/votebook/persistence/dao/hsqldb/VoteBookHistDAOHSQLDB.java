@@ -3,6 +3,7 @@ package com.niedson.votebook.persistence.dao.hsqldb;
 import java.util.List; 
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -29,13 +30,14 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
 		
 		VoteBookHist voteBookHistEm = em.find(VoteBookHist.class, voteBookHist.getId());
 		
-		em.getTransaction().begin();
-		voteBookHistEm.setBook1(voteBookHist.getBook1());
-		voteBookHistEm.setBook2(voteBookHist.getBook2());
-		voteBookHistEm.setChoosedBook(voteBookHist.getChoosedBook());
-		voteBookHistEm.setDateHourVote(voteBookHist.getDateHourVote());
-		voteBookHistEm.setSessionId(voteBookHist.getSessionId());
-		em.getTransaction().commit();
+		em.merge(voteBookHist);
+//		em.getTransaction().begin();
+//		voteBookHistEm.setBook1(voteBookHist.getBook1());
+//		voteBookHistEm.setBook2(voteBookHist.getBook2());
+//		voteBookHistEm.setChoosedBook(voteBookHist.getChoosedBook());
+//		voteBookHistEm.setDateHourVote(voteBookHist.getDateHourVote());
+//		voteBookHistEm.setSessionId(voteBookHist.getSessionId());
+//		em.getTransaction().commit();
 		
 		return voteBookHistEm;
 	}
@@ -45,8 +47,13 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
     }
     
     public VoteBookHist get(Long id) {
-    	List<VoteBookHist> resultList = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.id = " + id, VoteBookHist.class).getResultList();
-    	return resultList.isEmpty() ? null : resultList.get(0);
+    	try{
+	    	VoteBookHist result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.id = " + id, VoteBookHist.class).getSingleResult();
+	    	return result;
+        } catch(NoResultException e) {
+            return null;
+        }
+    	
     }
 	
 }

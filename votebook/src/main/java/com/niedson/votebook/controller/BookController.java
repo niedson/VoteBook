@@ -45,13 +45,20 @@ public class BookController {
 		System.out.println("voteBookHistId" + request.getParameter("voteBookHistId"));
 		System.out.println("selectedBookId" + request.getParameter("selectedBookId"));
 		
+		long voteBookHistId = request.getParameter("voteBookHistId") == null ? 0 : Long.valueOf(request.getParameter("voteBookHistId"));
+		
 		List<BookListId> bookListProbabilitySession = (List<BookListId>) request.getSession().getAttribute("bookListProbability");
-		VoteBookHist voteBookHistSession = voteBookHistService.get((Long) request.getSession().getAttribute("voteBookHistId"));
+		VoteBookHist voteBookHistSession = voteBookHistService.get(voteBookHistId);
 		
 		Book bookTeste = bookService.get((long) 2);
+		List<VoteBookHist> listAll2 = voteBookHistService.listAll();
+		VoteBookHist voteBookHist2 = voteBookHistService.get((long)1);
 		
 		if (!(voteBookHistSession == null)) {
-			voteBookHistSession.setChoosedBook(Long.getLong(request.getParameter("selectedBookId")));
+			System.out.println(request.getParameter("selectedBookId") == null);
+			System.out.println(request.getParameter("selectedBookId"));
+			Long choosedBookId = request.getParameter("selectedBookId") == null ? 0 :  Long.valueOf(request.getParameter("selectedBookId"));
+			voteBookHistSession.setChoosedBook(choosedBookId);
 			voteBookHistSession.setDateHourVote(new Date());
 			voteBookHistService.update(voteBookHistSession);
 		}
