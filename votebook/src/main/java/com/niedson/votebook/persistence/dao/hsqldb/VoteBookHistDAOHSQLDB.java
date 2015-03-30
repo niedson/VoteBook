@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niedson.votebook.persistence.dao.VoteBookHistDAO;
+import com.niedson.votebook.persistence.entity.Book;
 import com.niedson.votebook.persistence.entity.VoteBookHist;
 
 @Repository
@@ -44,8 +45,7 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
     }
     
     public VoteBookHist get(Long id) {
-    	List<VoteBookHist> resultList = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.id = " + id,
-    			VoteBookHist.class).getResultList();
+    	List<VoteBookHist> resultList = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.id = " + id, VoteBookHist.class).getResultList();
     	return resultList.isEmpty() ? null : resultList.get(0);
     }
 	

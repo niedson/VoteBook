@@ -48,6 +48,8 @@ public class BookController {
 		List<BookListId> bookListProbabilitySession = (List<BookListId>) request.getSession().getAttribute("bookListProbability");
 		VoteBookHist voteBookHistSession = voteBookHistService.get((Long) request.getSession().getAttribute("voteBookHistId"));
 		
+		Book bookTeste = bookService.get((long) 2);
+		
 		if (!(voteBookHistSession == null)) {
 			voteBookHistSession.setChoosedBook(Long.getLong(request.getParameter("selectedBookId")));
 			voteBookHistSession.setDateHourVote(new Date());

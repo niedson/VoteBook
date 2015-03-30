@@ -70,18 +70,7 @@
 						</c:forEach>
 		            	
 		            	<!-- Book FOR - End -->
-		                <div class="col-sm-6 whos-behind-box-1">
-		                	<div class="whos-behind-photo" style="height: auto;">
-		                		<img src="${pageContext.request.contextPath}/assets/images/livro-senhor-dos-aneis.jpg" alt="" style="-webkit-border-radius: initial;">
-		                		<div class="features-box-1-icon">
-		                		</div>
-		                	</div>
-		                    <h4>Senhor dos Aneis</h4>
-		                    <h5>hfgijosdpfjhjdbsakn</h5>
-		                    <p>
-		                    	História Antiga.
-		                    </p>
-		                </div>
+
 		            </div>
 				</form>
 	        </div>
