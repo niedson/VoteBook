@@ -25,7 +25,7 @@ import com.niedson.votebook.to.BookListId;
 @RequestMapping(value=ProjectURIConstants.BookController.PREFIX_MAPPING)
 public class BookController {
 	
-	private Logger logger = LoggerFactory.getLogger(BookController.class);
+	private Logger logger = LoggerFactory.getLogger(BookController.class); 
 	 
 	private BookService bookService;
 	private VoteBookHistService voteBookHistService;
@@ -45,33 +45,14 @@ public class BookController {
 		
 		List<BookListId> bookListProbabilitySession = (List<BookListId>) request.getSession().getAttribute("bookListProbability");
 		VoteBookHist voteBookHistSession = voteBookHistService.get(voteBookHistId);
+		String selectedBookId = request.getParameter("selectedBookId");
 		
-		if (!(voteBookHistSession == null)) {
-			Book choosedBook = (request.getParameter("selectedBookId") == null) ? null : 
-				bookService.get(Long.valueOf(request.getParameter("selectedBookId")));
-			voteBookHistSession.setChoosedBook(choosedBook);
-			voteBookHistSession.setDateHourVote(new Date());
-			voteBookHistService.update(voteBookHistSession);
-		}
+		voteBookHistService.updateVoteBookSetSelectedBook(voteBookHistSession, selectedBookId);
 		
-		List<BookListId> bookListProbability = new ArrayList<BookListId>();
-		
-		if (bookListProbabilitySession == null) {
-			List<Book> bookList = bookService.listAll();
-			while (bookList.size() > 1) {
-				Book book = bookList.remove(0);
-				for (Book bookInList : bookList) {
-					BookListId bookListId = new BookListId(book.getId(), bookInList.getId());
-					bookListProbability.add(bookListId);
-				}
-			}
-		} else {
-			bookListProbability = bookListProbabilitySession;
-		}
+		List<BookListId> bookListProbability  = bookService.getNextBookPair(bookListProbabilitySession);
 		
 		if (bookListProbability.size() == 0) {
 			request.getSession().removeAttribute("bookListProbability");
-			
 			return new ModelAndView("redirect:/user/register", "", null);
 		} else {
 			
@@ -94,5 +75,7 @@ public class BookController {
 			return new ModelAndView("book/choose", "bookList", selectedBooks);
 		}
 	}
+
+
 	
 }
