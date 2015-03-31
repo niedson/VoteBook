@@ -2,7 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/assets/javascript/jquery.min.js"></script>
 <title></title>
 <style type="text/css">
 </style>
@@ -12,8 +12,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- CSS -->
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oleo+Script">
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/OleoScript">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/fonts/OpenSans">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/font-awesome.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/form-elements.css">
