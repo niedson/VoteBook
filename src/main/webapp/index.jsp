@@ -1,1 +1,1 @@
-asd
+<% response.sendRedirect("book/choose"); %>

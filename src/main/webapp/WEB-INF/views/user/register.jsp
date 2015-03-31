@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <html>
 <head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <title></title>
 <style type="text/css">
 </style>
@@ -11,6 +12,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- CSS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oleo+Script">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/font-awesome.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/form-elements.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/buttons.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/ultm.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/stylesheet/media-queries.css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,6 +30,12 @@
 <![endif]-->
 
 <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${pageContext.request.contextPath}/assets/images/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${pageContext.request.contextPath}/assets/images/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="${pageContext.request.contextPath}/assets/images/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/assets/images/apple-touch-icon-57-precomposed.png">
+
 
 
 <body style="background-color: #3d3d3d">
@@ -69,6 +85,12 @@
 	        </div>
         </footer>
 	
+    <!-- Javascript -->
+    <script src="${pageContext.request.contextPath}/assets/javascript/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/javascript/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/javascript/jquery.backstretch.min.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/javascript/retina-1.1.0.min.js"></script>
+    
     <!--[if lt IE 10]>
         <script src="assets/js/placeholder.js"></script>
     <![endif]-->	
