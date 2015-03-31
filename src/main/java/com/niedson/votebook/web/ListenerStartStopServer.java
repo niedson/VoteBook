@@ -53,31 +53,31 @@ public class ListenerStartStopServer implements ServletContextListener{
 		book.setImage("TorreNegraOPistoleiro.jpg");
 		
 		bookDAO.save(book);
-//
-//		book = new Book();
-//		book.setName("A dança da morte");
-//		book.setAuthor("Stephen King");
-//		book.setImage("ADancaDaMorte.jpg");
-//		
-//		bookDAO.save(book);
-//		book = new Book();
-//		book.setName("O Alquimista");
-//		book.setAuthor("Paulo Coelho");
-//		book.setImage("oAlquimista.jpg");
-//		
-//		bookDAO.save(book);
-//		book = new Book();
-//		book.setName("Millenium");
-//		book.setAuthor("Stieg Larsson");
-//		book.setImage("millenium.jpg");
-//		
-//		bookDAO.save(book);
-//		book = new Book();
-//		book.setName("Senhor dos Aneis");
-//		book.setAuthor("J.R.R. Tolkien");
-//		book.setImage("SenhorDosAneis.jpg");
-//		
-//		bookDAO.save(book);
+
+		book = new Book();
+		book.setName("A dança da morte");
+		book.setAuthor("Stephen King");
+		book.setImage("ADancaDaMorte.jpg");
+		
+		bookDAO.save(book);
+		book = new Book();
+		book.setName("O Alquimista");
+		book.setAuthor("Paulo Coelho");
+		book.setImage("oAlquimista.jpg");
+		
+		bookDAO.save(book);
+		book = new Book();
+		book.setName("Millenium");
+		book.setAuthor("Stieg Larsson");
+		book.setImage("millenium.jpg");
+		
+		bookDAO.save(book);
+		book = new Book();
+		book.setName("Senhor dos Aneis");
+		book.setAuthor("J.R.R. Tolkien");
+		book.setImage("SenhorDosAneis.jpg");
+		
+		bookDAO.save(book);
 		
 		logger.info("Table book loaded");
 	}	
