@@ -1,5 +1,7 @@
 package com.niedson.votebook.model.service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.niedson.votebook.persistence.dao.BookDAO;
 import com.niedson.votebook.persistence.entity.Book;
+import com.niedson.votebook.persistence.entity.VoteBookHist;
+import com.niedson.votebook.to.BookListId;
 
 @Service
 public class BookService {
@@ -35,78 +39,21 @@ public class BookService {
 		return bookDAO.get(id);
 	}
 	
+	public List<BookListId> getNextBookPair(List<BookListId> bookListProbabilitySession) {
+		List<BookListId> bookListProbability = new ArrayList<BookListId>();
+		if (bookListProbabilitySession == null) {
+			List<Book> bookList = this.listAll();
+			while (bookList.size() > 1) {
+				Book book = bookList.remove(0);
+				for (Book bookInList : bookList) {
+					BookListId bookListId = new BookListId(book.getId(), bookInList.getId());
+					bookListProbability.add(bookListId);
+				}
+			}
+		} else {
+			bookListProbability = bookListProbabilitySession;
+		}
+		return bookListProbability;
+	}
 	
-//	
-//	public void addLocationToMap(String mapName, String locationA, String locationB, Integer cost){
-//		logger.debug("params: [mapName:{},locationA:{},locationB:{},cost:{}]", mapName, locationA, locationB, cost);
-//		
-//		locationA = locationA.trim().toUpperCase();
-//		locationB = locationB.trim().toUpperCase();
-//		
-//		Maps maps = mapsDAO.findByNameIgnoreCase(mapName);
-//		if(maps == null){
-//			maps = new Maps( mapName.trim() );
-//			mapsDAO.insert(maps);
-//		}
-//		
-//		List<String> listNames = new ArrayList<String>();
-//		listNames.add( locationA );
-//		listNames.add( locationB );
-//		
-//		List<MapLocation> listMapLocations = mapLocationDAO.findByMapsIdAndLocationInList(maps.getId(), listNames);
-//		if( listMapLocations.isEmpty() ){
-//			MapLocation mapLocationA = new MapLocation( locationA, maps.getId() );
-//			mapLocationDAO.insert(mapLocationA);
-//			listMapLocations.add(mapLocationA);
-//			
-//			MapLocation mapLocationB = new MapLocation( locationB, maps.getId() );
-//			mapLocationDAO.insert(mapLocationB);
-//			listMapLocations.add(mapLocationB);
-//		} else if( listMapLocations.size() == 1 ){
-//			boolean existLocationA = false;
-//			for (MapLocation mapLocation: listMapLocations) {
-//				if(mapLocation.getLocation().equals(locationA)){
-//					existLocationA = true;
-//				}
-//			}
-//			
-//			if(existLocationA == false){
-//				MapLocation mapLocationA = new MapLocation( locationA, maps.getId() );
-//				mapLocationDAO.insert(mapLocationA);
-//				listMapLocations.add(mapLocationA);
-//			} else {
-//				MapLocation mapLocationB = new MapLocation( locationB, maps.getId() );
-//				mapLocationDAO.insert(mapLocationB);
-//				listMapLocations.add(mapLocationB);
-//			}
-//		}
-//		
-//		for (MapLocation mapLocation : listMapLocations) {
-//			if(mapLocation.getLocation().equals(locationA)){
-//				mapLocation.addEdge(locationB, cost);
-//			} else if(mapLocation.getLocation().equals(locationB)){
-//				mapLocation.addEdge(locationA, cost);
-//			}
-//			mapLocationDAO.update(mapLocation);
-//		}
-//	}
-//	
-//	public MinorPathTO calculateMinorPath(String mapName, String locationBegin, String locationEnd, Integer fuelAutonomy, Double fuelCost) throws DeliveryException{
-//		logger.debug("params: [mapName:{},locationBegin:{},locationB:{},fuelAutonomy:{},fuelCost:{}]", mapName, locationBegin, locationEnd, fuelAutonomy, fuelCost);
-//		
-//		Maps maps = mapsDAO.findByNameIgnoreCase(mapName);
-//		if(maps == null){
-//			logger.info("mapName '{}' not found", mapName);
-//			throw new DeliveryException("Not found mapName.");
-//		}
-//		
-//		ResultMinorPathAlgorithm resultMinorPathAlgorithm = new MinorPathAlgorithm(mapLocationDAO).calculate(maps.getId(), locationBegin, locationEnd);
-//		
-//		MinorPathTO minorPathTO = new MinorPathTO(resultMinorPathAlgorithm);
-//		minorPathTO.setFuelAutonomy(fuelAutonomy);
-//		minorPathTO.setFuelCost(fuelCost);
-//		minorPathTO.setMapName(mapName);
-//		
-//		return minorPathTO;
-//	}
 }
