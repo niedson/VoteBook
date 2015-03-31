@@ -53,7 +53,7 @@ public class UserController {
 		List<VoteBookHist> listVoteBookHist = voteBookHistService.findBySessionId(sessionId);
 			
 		for (VoteBookHist savedBookHist : listVoteBookHist) {
-			savedBookHist.setUser(user.getId());
+			savedBookHist.setUser(user);
 			voteBookHistService.update(savedBookHist);
 		}
 		

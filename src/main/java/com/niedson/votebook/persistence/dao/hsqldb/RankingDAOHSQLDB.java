@@ -33,10 +33,16 @@ public class RankingDAOHSQLDB implements RankingDAO{
 	public RankingDAOHSQLDB(BookDAO bookDAO) {
 		this.bookDAO = bookDAO;
 	}
+	
+	public RankingUserBookCount getBookListCountByUser(User user){
+		
+		
+		return null;
+	}
 
 	public List<RankingBookCount> listBookCount() {
 		
-		Query query = em.createNativeQuery("SELECT choosedBook, count(id) as cn FROM VOTEBOOKHIST WHERE choosedBook is not null GROUP BY choosedBook" );
+		Query query = em.createNativeQuery("SELECT choosedbook_id, count(id) as cn FROM VOTEBOOKHIST WHERE choosedbook_id is not null GROUP BY choosedbook_id" );
 		List<Object[]> resultList = query.getResultList();
 		
 		List<RankingBookCount> listBookCount = new ArrayList<RankingBookCount>(); 
@@ -49,10 +55,22 @@ public class RankingDAOHSQLDB implements RankingDAO{
 		
     	return listBookCount;
 	}
-
-//    public Book get(Long id) {
-//    	List<Book> resultList = em.createQuery(" FROM Book b WHERE b.id = " + id, Book.class).getResultList();
-//    	return resultList.isEmpty() ? null : resultList.get(0);
-//    }
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -4,8 +4,6 @@ public class BookListId {
 	private Long firstBookId;
 	private Long secondBookId;
 	
-	public BookListId() {}
-	
 	public BookListId(Long firstBookId, Long secondBookId) {
 		this.firstBookId = firstBookId;
 		this.secondBookId = secondBookId;

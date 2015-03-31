@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -13,32 +15,56 @@ public class VoteBookHist {
 	@Id @GeneratedValue
 	private Long id;
 	
-	private Long book1;
-	private Long book2;
-	private Long choosedBook;
+	@OneToOne
+	private Book firstBook;
+
+	@OneToOne
+	private Book secondBook;
+	
+	@OneToOne
+	private Book choosedBook;
 	private Date dateHourVote;
 	private String sessionId;
-	private Long user;
 	
+	@ManyToOne
+	private User user;
+
+	public VoteBookHist() {}
 	
-	public VoteBookHist(Long book1, Long book2, Long choosedBook,
-			Date dateHourVote, String sessionId) {
+	public VoteBookHist(Book firstBook, Book secondBook, Book choosedBook,
+			Date dateHourVote, String sessionId, User user) {
 		super();
-		this.book1 = book1;
-		this.book2 = book2;
+		this.firstBook = firstBook;
+		this.secondBook = secondBook;
 		this.choosedBook = choosedBook;
 		this.dateHourVote = dateHourVote;
 		this.sessionId = sessionId;
+		this.user = user;
 	}
-	
-	public VoteBookHist() {
-		
-	}
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Book getFirstBook() {
+		return firstBook;
+	}
+	public void setFirstBook(Book firstBook) {
+		this.firstBook = firstBook;
+	}
+	public Book getSecondBook() {
+		return secondBook;
+	}
+	public void setSecondBook(Book secondBook) {
+		this.secondBook = secondBook;
+	}
+	public Book getChoosedBook() {
+		return choosedBook;
+	}
+	public void setChoosedBook(Book choosedBook) {
+		this.choosedBook = choosedBook;
 	}
 	public Date getDateHourVote() {
 		return dateHourVote;
@@ -46,36 +72,16 @@ public class VoteBookHist {
 	public void setDateHourVote(Date dateHourVote) {
 		this.dateHourVote = dateHourVote;
 	}
-	public Long getBook1() {
-		return book1;
-	}
-	public void setBook1(Long book1) {
-		this.book1 = book1;
-	}
-	public Long getBook2() {
-		return book2;
-	}
-	public void setBook2(Long book2) {
-		this.book2 = book2;
-	}
 	public String getSessionId() {
 		return sessionId;
 	}
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
-	public Long getChoosedBook() {
-		return choosedBook;
-	}
-	public void setChoosedBook(Long choosedBook) {
-		this.choosedBook = choosedBook;
-	}
-
-	public Long getUser() {
+	public User getUser() {
 		return user;
 	}
-
-	public void setUser(Long user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 }

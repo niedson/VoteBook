@@ -6,11 +6,14 @@ public class RankingBookCount {
 	private Book book;
 	private Long count;
 	
+	public RankingBookCount() {}
+	
 	public RankingBookCount(Book book, Long count) {
 		super();
 		this.book = book;
 		this.count = count;
 	}
+	
 	public Book getBook() {
 		return book;
 	}
@@ -23,6 +26,5 @@ public class RankingBookCount {
 	public void setCount(Long count) {
 		this.count = count;
 	}
-	
 	
 }

@@ -17,6 +17,7 @@ import com.niedson.votebook.controller.uri.ProjectURIConstants;
 import com.niedson.votebook.model.service.BookService;
 import com.niedson.votebook.model.service.VoteBookHistService;
 import com.niedson.votebook.persistence.entity.Book;
+import com.niedson.votebook.persistence.entity.User;
 import com.niedson.votebook.persistence.entity.VoteBookHist;
 import com.niedson.votebook.to.BookListId;
 
@@ -56,8 +57,9 @@ public class BookController {
 		if (!(voteBookHistSession == null)) {
 			System.out.println(request.getParameter("selectedBookId") == null);
 			System.out.println(request.getParameter("selectedBookId"));
-			Long choosedBookId = request.getParameter("selectedBookId") == null ? 0 :  Long.valueOf(request.getParameter("selectedBookId"));
-			voteBookHistSession.setChoosedBook(choosedBookId);
+			Book choosedBook = (request.getParameter("selectedBookId") == null) ? null : 
+				bookService.get(Long.valueOf(request.getParameter("selectedBookId")));
+			voteBookHistSession.setChoosedBook(choosedBook);
 			voteBookHistSession.setDateHourVote(new Date());
 			voteBookHistService.update(voteBookHistSession);
 		}
@@ -65,7 +67,7 @@ public class BookController {
 		List<VoteBookHist> listAll = voteBookHistService.listAll();
 		
 		for (VoteBookHist voteBookHist : listAll) {
-			System.out.println(voteBookHist.getId() + " | " + voteBookHist.getBook1() + " | " + voteBookHist.getBook2());
+			System.out.println(voteBookHist.getId() + " | " + voteBookHist.getFirstBook() + " | " + voteBookHist.getSecondBook());
 		}
 		
 		List<BookListId> bookListProbability = new ArrayList<BookListId>();
@@ -86,21 +88,21 @@ public class BookController {
 		if (bookListProbability.size() == 0) {
 			request.getSession().removeAttribute("bookListProbability");
 			
-			return new ModelAndView("redirect:/user/register", "asdsads", null);
+			return new ModelAndView("redirect:/user/register", "", null);
 		} else {
 			
 			int index = gerador.nextInt( bookListProbability.size());
 			BookListId  bookListProbabilityChosed = bookListProbability.remove(index);
 			
 			List<Book> selectedBooks = new ArrayList<Book>();
-			Long firstBookId = bookListProbabilityChosed.getFirstBookId();
-			Long secondBookId = bookListProbabilityChosed.getSecondBookId();
+			Book firstBookId = bookService.get(bookListProbabilityChosed.getFirstBookId());
+			Book secondBookId = bookService.get(bookListProbabilityChosed.getSecondBookId());
 
-			selectedBooks.add(bookService.get(firstBookId));
-			selectedBooks.add(bookService.get(secondBookId));
+			selectedBooks.add(bookService.get(firstBookId.getId()));
+			selectedBooks.add(bookService.get(secondBookId.getId()));
 			
 			VoteBookHist voteBookHist = voteBookHistService.save(new VoteBookHist(firstBookId, secondBookId, 
-					null, new Date(), request.getSession().getId()));
+					null, new Date(), request.getSession().getId(), null));
 			
 			request.getSession().setAttribute("bookListProbability", bookListProbability);
 			request.getSession().setAttribute("voteBookHist", voteBookHist);

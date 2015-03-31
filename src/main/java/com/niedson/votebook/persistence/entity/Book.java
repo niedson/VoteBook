@@ -10,6 +10,8 @@ public class Book {
 	@Id @GeneratedValue
 	private Long id;
 	
+	private String name, author, image;
+	
 	public Book() {}
 	
 	public Book(Long id, String name, String author, String image) {
@@ -20,10 +22,6 @@ public class Book {
 		this.image = image;
 	}
 	
-	private String name, author, image;
-	
-	/* Getters and Setters */
-
 	public Long getId() {
 		return id;
 	}
