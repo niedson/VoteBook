@@ -59,7 +59,7 @@ public class UserController {
 		
 		List<VoteBookHist> listAllHists = voteBookHistService.listAll();
 		
-		return new ModelAndView("/user/register", "bookList", null);
+		return new ModelAndView("redirect:/ranking/show", "bookList", null);
 	}
 	
 	

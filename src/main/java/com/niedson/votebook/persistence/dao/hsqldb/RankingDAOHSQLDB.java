@@ -6,6 +6,7 @@ import java.util.ListResourceBundle;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -41,9 +42,10 @@ public class RankingDAOHSQLDB implements RankingDAO{
 
 	public List<RankingBookCount> listBookCount() {
 		
-		List<Object[]> resultList = 
-			em.createQuery("SELECT vbh.choosedBook, count(m) as cn FROM votebookhist GROUP BY vbh.choosedBook")
-				.getResultList();
+		System.out.println("asd");
+		
+		Query query = em.createNativeQuery("SELECT choosedBook, count(id) as cn FROM VOTEBOOKHIST WHERE choosedBook is not null GROUP BY choosedBook" );
+		List<Object[]> resultList = query.getResultList();
 		
 		List<RankingBookCount> listBookCount = new ArrayList<RankingBookCount>(); 
 		
