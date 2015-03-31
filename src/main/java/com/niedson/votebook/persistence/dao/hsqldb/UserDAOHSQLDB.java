@@ -3,6 +3,7 @@ package com.niedson.votebook.persistence.dao.hsqldb;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -33,4 +34,18 @@ public class UserDAOHSQLDB implements UserDAO {
     	return resultList.isEmpty() ? null : resultList.get(0);
 	}
 
+	public User findByNameAndEmail(String name, String email) {
+		
+		try {	
+			User result = em.createQuery(" "
+					+ " FROM User u "
+					+ " WHERE u.name = '" + name + "' "
+					+ "   AND u.email = '" + email + "' ", User.class).getSingleResult();
+			return result;
+		
+	    } catch(NoResultException e) {
+	        return null;
+	    }
+	}
+	
 }

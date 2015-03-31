@@ -1,24 +1,31 @@
 package com.niedson.votebook.to;
 
-import com.niedson.votebook.persistence.entity.Book;
+import java.util.List; 
+
 import com.niedson.votebook.persistence.entity.User;
 
-public class RankingUserBookCount extends RankingBookCount {
+public class RankingUserBookCount {
 	private User user;
+	private List<RankingBookCount> listRankingBookCount;
 
-	public RankingUserBookCount() {
-		super();
+	public RankingUserBookCount() {}
+	
+	public RankingUserBookCount(User user,
+			List<RankingBookCount> listRankingBookCount) {
+		this.user = user;
+		this.listRankingBookCount = listRankingBookCount;
 	}
 	
-	public RankingUserBookCount(Book book, Long count, User user) {
-		super(book, count);
-		this.user = user;
-	}
-
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public List<RankingBookCount> getListRankingBookCount() {
+		return listRankingBookCount;
+	}
+	public void setListRankingBookCount(List<RankingBookCount> listRankingBookCount) {
+		this.listRankingBookCount = listRankingBookCount;
 	}
 }

@@ -93,6 +93,5 @@
         <script src="assets/js/placeholder.js"></script>
     <![endif]-->	
 	
-	</script>
 </body>
 </html>

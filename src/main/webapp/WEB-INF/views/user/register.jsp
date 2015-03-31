@@ -45,7 +45,7 @@
 	                <div class="col-sm-12 subscribe" style="height: 70%">
 	                    <h3>Cadastro</h3>
 	                    <p>Informe seu nome e email para entrar no ranking</p>
-	                    <form class="form-inline" role="form" action="send" method="post">
+	                    <form class="form-inline" role="form" action="save" method="post">
 							<div class="row">	                    
 			                	<div class="form-group">
 			                		<label class="sr-only" for="subscribe-email">Email address</label>

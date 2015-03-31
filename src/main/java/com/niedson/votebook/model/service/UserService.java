@@ -35,4 +35,8 @@ public class UserService {
 		return userDAO.get(id);
 	}
 	
+	public User findByNameAndEmail(String name, String email) {
+		return userDAO.findByNameAndEmail(name, email);
+	}
+	
 }

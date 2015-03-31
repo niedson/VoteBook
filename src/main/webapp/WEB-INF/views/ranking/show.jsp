@@ -63,6 +63,14 @@
 					</c:forEach>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-sm-12 whos-behind">
+				Usuário: ${ userBookCount.user.name }
+					<c:forEach items="${ userBookCount.listRankingBookCount }" var="bookCount">
+					   	 Livro: ${ bookCount.book.name } Votos: ${ bookCount.count } <br/>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 

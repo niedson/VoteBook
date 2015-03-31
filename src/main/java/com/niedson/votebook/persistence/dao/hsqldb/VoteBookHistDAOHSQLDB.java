@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niedson.votebook.persistence.dao.VoteBookHistDAO;
 import com.niedson.votebook.persistence.entity.Book;
+import com.niedson.votebook.persistence.entity.User;
 import com.niedson.votebook.persistence.entity.VoteBookHist;
 
 @Repository
@@ -50,7 +51,7 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
     
     public List<VoteBookHist> findBySessionId(String sessionId) {
     	try{
-    		List<VoteBookHist> result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.sessionId = '" + sessionId + "'", 
+    		List<VoteBookHist> result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.sessionId = '" + sessionId + "' AND user_id is null", 
     				VoteBookHist.class).getResultList();
     		return result;
     	} catch(NoResultException e) {
@@ -58,4 +59,14 @@ public class VoteBookHistDAOHSQLDB implements VoteBookHistDAO{
     	}
     }
 	
+    public VoteBookHist findByUser(User user) {
+    	try{
+    		VoteBookHist result = em.createQuery(" FROM VoteBookHist vbh WHERE vbh.user_id = " + user.getId(), 
+    				VoteBookHist.class).getSingleResult();
+    		return result;
+    	} catch(NoResultException e) {
+    		return null;
+    	}
+    }
+    
 }

@@ -10,7 +10,7 @@ public class ProjectURIConstants {
 	public class UserController{
 		public static final String PREFIX_MAPPING = "/user";
 		public static final String REGISTER = "/register";
-		public static final String SEND = "/send";
+		public static final String SAVE = "/save";
 	}
 	
 	public class RankingController{

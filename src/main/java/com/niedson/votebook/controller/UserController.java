@@ -40,13 +40,21 @@ public class UserController {
 		return new ModelAndView("/user/register", "bookList", null);
 	}
 	
-	@RequestMapping(value=ProjectURIConstants.UserController.SEND)
+	@RequestMapping(value=ProjectURIConstants.UserController.SAVE)
 	public ModelAndView send(HttpServletRequest request){
 		
-		User user = new User(request.getParameter("name"), request.getParameter("email"));
-		userService.save(user);
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
 		
-		List<User> listAll = userService.listAll();
+		User userByNameAndEmail = userService.findByNameAndEmail(name, email);
+		User user = new User();
+		
+		if (userByNameAndEmail == null) {
+			user = new User(name, email);
+			userService.save(user);
+		} else {
+			user = userByNameAndEmail;
+		}
 		
 		String sessionId = request.getSession().getId();
 		
@@ -57,9 +65,7 @@ public class UserController {
 			voteBookHistService.update(savedBookHist);
 		}
 		
-		List<VoteBookHist> listAllHists = voteBookHistService.listAll();
-		
-		return new ModelAndView("redirect:/ranking/show", "bookList", null);
+		return new ModelAndView("redirect:/ranking/show?userId=" + user.getId());
 	}
 	
 	

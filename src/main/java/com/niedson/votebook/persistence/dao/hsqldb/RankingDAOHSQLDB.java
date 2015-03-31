@@ -35,16 +35,35 @@ public class RankingDAOHSQLDB implements RankingDAO{
 	}
 	
 	public RankingUserBookCount getBookListCountByUser(User user){
+		Query query = em.createNativeQuery(
+				  "SELECT choosedbook_id, count(id) as cn "
+				+ " FROM VOTEBOOKHIST "
+				+ "WHERE choosedbook_id is not null "
+				+ "	AND user_id = " + user.getId()  
+				+ " GROUP BY choosedbook_id" );
+
+		List<Object[]> resultList = query.getResultList();
+		List<RankingBookCount> listBookCount = new ArrayList<RankingBookCount>(); 
 		
+		for (Object[] bookCount : resultList) {
+			RankingBookCount rankingBookCount = new RankingBookCount(bookDAO.get(Long.valueOf(String.valueOf(bookCount[0]))),
+					Long.valueOf(String.valueOf(bookCount[1])));
+			listBookCount.add(rankingBookCount);
+		}
 		
-		return null;
+		return new RankingUserBookCount(user, listBookCount);
+		
 	}
 
 	public List<RankingBookCount> listBookCount() {
 		
-		Query query = em.createNativeQuery("SELECT choosedbook_id, count(id) as cn FROM VOTEBOOKHIST WHERE choosedbook_id is not null GROUP BY choosedbook_id" );
+		Query query = em.createNativeQuery(
+				"SELECT choosedbook_id, count(id) as cn "
+			  + " FROM VOTEBOOKHIST "
+			  + "WHERE choosedbook_id is not null "
+			  + "GROUP BY choosedbook_id " );
+
 		List<Object[]> resultList = query.getResultList();
-		
 		List<RankingBookCount> listBookCount = new ArrayList<RankingBookCount>(); 
 		
 		for (Object[] bookCount : resultList) {

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.niedson.votebook.persistence.dao.VoteBookHistDAO;
+import com.niedson.votebook.persistence.entity.User;
 import com.niedson.votebook.persistence.entity.VoteBookHist;
 
 @Service
@@ -41,6 +42,10 @@ public class VoteBookHistService {
 	
 	 public List<VoteBookHist> findBySessionId(String sessionId){
 		 return voteBookHistDAO.findBySessionId(sessionId); 
+	 }
+	 
+	 public VoteBookHist findByUser(User user) {
+		 return voteBookHistDAO.findByUser(user);
 	 }
 	 
 }
