@@ -224,12 +224,21 @@
                                 <version>7.0.57.2</version>
                                 <destFileName>webapp-runner.jar</destFileName>
                             </artifactItem>
+		                    <artifactItem>
+		                        <groupId>org.mortbay.jetty</groupId>
+		                        <artifactId>jetty-runner</artifactId>
+		                        <version>7.4.5.v20110725</version>
+		                        <destFileName>jetty-runner.jar</destFileName>
+		                    </artifactItem>                            
                         </artifactItems>
                     </configuration>
                 </execution>
             </executions>
         </plugin>
+        
+        
     </plugins>		
+    
 	</build>
 	<!-- http://devcrumb.com/hibernate/hibernate-jpa-spring-and-hsqldb -->
 </project>
