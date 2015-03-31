@@ -13,5 +13,10 @@ public class ProjectURIConstants {
 		public static final String SEND = "/send";
 	}
 	
+	public class RankingController{
+		public static final String PREFIX_MAPPING = "/ranking";
+		public static final String SHOW = "/show";
+	}
+	
 
 }
