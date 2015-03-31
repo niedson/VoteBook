@@ -102,7 +102,7 @@
 					<div class="col-sm-5 footer-social">
 						<a
 							class="ultm ultm-facebook ultm-48 ultm-square ultm-gray-to-color"
-							target="_blank" href="https://github.com/niedson"> <img
+							target="_blank" href="https://github.com/niedson/VoteBook"> <img
 							src="${pageContext.request.contextPath}/assets/images/github.jpeg">
 						</a>
 					</div>

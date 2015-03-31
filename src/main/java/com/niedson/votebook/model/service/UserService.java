@@ -39,4 +39,18 @@ public class UserService {
 		return userDAO.findByNameAndEmail(name, email);
 	}
 	
+	public User findUserByNameAndEmailOrCreate(String name, String email) {
+		User userByNameAndEmail = userDAO.findByNameAndEmail(name, email);
+		User user = new User();
+		
+		if (userByNameAndEmail == null) {
+			user = new User(name, email);
+		    user = this.save(user);
+		} else {
+			user = userByNameAndEmail;
+		}
+		return user;
+	}
+	
+	
 }

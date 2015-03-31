@@ -36,8 +36,6 @@ public class RankingController {
 	@RequestMapping(value=ProjectURIConstants.RankingController.SHOW)
 	public String send(HttpServletRequest request, Model model){
 		
-		System.out.println(request.getParameter("userId"));
-		
 		List<RankingBookCount> listBookCount = rankingService.listBookCount();
 		
 		User user = userService.get(Long.valueOf(request.getParameter("userId")));

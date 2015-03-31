@@ -41,33 +41,17 @@ public class BookController {
 		
 		Random gerador = new Random();
 		
-		System.out.println("voteBookHistId: " + request.getParameter("voteBookHistId"));
-		System.out.println("selectedBookId: " + request.getParameter("selectedBookId"));
-		System.out.println("request.getSession().getId(): " + request.getSession().getId());
-		
 		long voteBookHistId = request.getParameter("voteBookHistId") == null ? 0 : Long.valueOf(request.getParameter("voteBookHistId"));
 		
 		List<BookListId> bookListProbabilitySession = (List<BookListId>) request.getSession().getAttribute("bookListProbability");
 		VoteBookHist voteBookHistSession = voteBookHistService.get(voteBookHistId);
 		
-		Book bookTeste = bookService.get((long) 2);
-		List<VoteBookHist> listAll2 = voteBookHistService.listAll();
-		VoteBookHist voteBookHist2 = voteBookHistService.get((long)1);
-		
 		if (!(voteBookHistSession == null)) {
-			System.out.println(request.getParameter("selectedBookId") == null);
-			System.out.println(request.getParameter("selectedBookId"));
 			Book choosedBook = (request.getParameter("selectedBookId") == null) ? null : 
 				bookService.get(Long.valueOf(request.getParameter("selectedBookId")));
 			voteBookHistSession.setChoosedBook(choosedBook);
 			voteBookHistSession.setDateHourVote(new Date());
 			voteBookHistService.update(voteBookHistSession);
-		}
-		
-		List<VoteBookHist> listAll = voteBookHistService.listAll();
-		
-		for (VoteBookHist voteBookHist : listAll) {
-			System.out.println(voteBookHist.getId() + " | " + voteBookHist.getFirstBook() + " | " + voteBookHist.getSecondBook());
 		}
 		
 		List<BookListId> bookListProbability = new ArrayList<BookListId>();
