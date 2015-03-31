@@ -74,7 +74,7 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-sm-7 footer-copyright">
-	                    <p>© Vote Livro por Niedson Araujo<br>Todos os direitos reservados.</p>
+	                    <p>VoteLivro por Niedson Araujo</p>
 	                </div>
 	                <div class="col-sm-5 footer-social">
 	                    <a class="ultm ultm-facebook ultm-48 ultm-square ultm-gray-to-color" target="_blank" href="https://github.com/niedson">

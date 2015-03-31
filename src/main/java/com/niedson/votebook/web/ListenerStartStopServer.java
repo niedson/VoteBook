@@ -45,32 +45,32 @@ public class ListenerStartStopServer implements ServletContextListener{
 		Book book = new Book();
 		book.setName("A Torre Negra");
 		book.setAuthor("Stephen King");
-		book.setImage("/images/");
+		book.setImage("TorreNegraOPistoleiro.jpg");
 		
 		bookDAO.save(book);
 
 		book = new Book();
 		book.setName("A dança da morte");
 		book.setAuthor("Stephen King");
-		book.setImage("/images/");
+		book.setImage("ADancaDaMorte.jpg");
 		
 		bookDAO.save(book);
 		book = new Book();
 		book.setName("O Alquimista");
 		book.setAuthor("Paulo Coelho");
-		book.setImage("/images/");
+		book.setImage("oAlquimista.jpg");
 		
 		bookDAO.save(book);
 		book = new Book();
 		book.setName("Millenium");
 		book.setAuthor("Stieg Larsson");
-		book.setImage("/images/");
+		book.setImage("millenium.jpg");
 		
 		bookDAO.save(book);
 		book = new Book();
 		book.setName("Senhor dos Aneis");
 		book.setAuthor("J.R.R. Tolkien");
-		book.setImage("/images/");
+		book.setImage("SenhorDosAneis.jpg");
 		
 		bookDAO.save(book);
 	}	

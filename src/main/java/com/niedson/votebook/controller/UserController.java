@@ -68,6 +68,4 @@ public class UserController {
 		return new ModelAndView("redirect:/ranking/show?userId=" + user.getId());
 	}
 	
-	
-	
 }

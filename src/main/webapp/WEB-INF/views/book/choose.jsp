@@ -57,14 +57,11 @@
 						<c:forEach items="${ bookList }" var="book" varStatus="status">
 			                <div class="col-sm-6 whos-behind-box-1">
 			                	<div class="whos-behind-photo vote-book" data-book-id="${book.id}" style="height: auto;">
-			                		<img src="${pageContext.request.contextPath}/assets/images/livro-senhor-dos-aneis.jpg" alt="" style="-webkit-border-radius: initial;">
+			                		<img src="${pageContext.request.contextPath}/assets/images/${book.image}" alt="" style="-webkit-border-radius: initial;">
 			                		<div class="features-box-1-icon">
 			                		</div>
-			                    <h4>${book.name}</h4>
-			                    <h5>${book.name}</h5>
-			                    <p>
-			                    	${book.author }
-			                    </p>
+			                    <p>${book.name}</p>
+			                    <h5>${book.author}</h5>
 				                </div>
 			                </div>
 						</c:forEach>
@@ -82,7 +79,7 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-sm-7 footer-copyright">
-	                    <p>© Vote Livro por Niedson Araujo<br>Todos os direitos reservados.</p>
+	                    <p>VoteLivro por Niedson Araujo</p>
 	                </div>
 	                <div class="col-sm-5 footer-social">
 	                    <a class="ultm ultm-facebook ultm-48 ultm-square ultm-gray-to-color" target="_blank" href="https://github.com/niedson">
