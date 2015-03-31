@@ -77,8 +77,6 @@
             </div>	
 			</c:forEach>		
 			
-			
-			
 			<div class="row">
                 <div class="col-sm-12 whos-behind">
                     <p>Geral</p>
@@ -98,39 +96,38 @@
 		</div>
 	</div>
 
-
-		<!-- Footer -->
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-7 footer-copyright">
-						<p>
-							VoteLivro por Niedson Araujo
-						</p>
-					</div>
-					<div class="col-sm-5 footer-social">
-						<a
-							class="ultm ultm-facebook ultm-48 ultm-square ultm-gray-to-color"
-							target="_blank" href="https://github.com/niedson"> <img
-							src="${pageContext.request.contextPath}/assets/images/github.jpeg">
-						</a>
-					</div>
+	<!-- Footer -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-7 footer-copyright">
+					<p>
+						VoteLivro por Niedson Araujo
+					</p>
+				</div>
+				<div class="col-sm-5 footer-social">
+					<a
+						class="ultm ultm-facebook ultm-48 ultm-square ultm-gray-to-color"
+						target="_blank" href="https://github.com/niedson"> <img
+						src="${pageContext.request.contextPath}/assets/images/github.jpeg">
+					</a>
 				</div>
 			</div>
-		</footer>
+		</div>
+	</footer>
 
-		<!-- Javascript -->
-		<script
-			src="${pageContext.request.contextPath}/assets/javascript/jquery-1.11.1.min.js"></script>
-		<script
-			src="${pageContext.request.contextPath}/assets/javascript/bootstrap.min.js"></script>
-		<script
-			src="${pageContext.request.contextPath}/assets/javascript/jquery.backstretch.min.js"></script>
-		<script
-			src="${pageContext.request.contextPath}/assets/javascript/retina-1.1.0.min.js"></script>
+	<!-- Javascript -->
+	<script
+		src="${pageContext.request.contextPath}/assets/javascript/jquery-1.11.1.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/javascript/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/javascript/jquery.backstretch.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/assets/javascript/retina-1.1.0.min.js"></script>
 
-		<!--[if lt IE 10]>
-        <script src="assets/js/placeholder.js"></script>
+	<!--[if lt IE 10]>
+       <script src="assets/js/placeholder.js"></script>
     <![endif]-->
 </body>
 
