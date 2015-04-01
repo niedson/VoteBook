@@ -38,7 +38,18 @@ public class RankingController {
 		
 		List<RankingBookCount> listBookCount = rankingService.listBookCount();
 		
+		if (request.getParameter("userId") == null) {
+			model.addAttribute("errorMessage", "Usuário não encontrado.");
+			return "/ranking/show";
+		}
+		
 		User user = userService.get(Long.valueOf(request.getParameter("userId")));
+		if (user == null) {
+			model.addAttribute("errorMessage", "Usuário não encontrado.");
+			return "/ranking/show";
+		}		
+		
+		
 		RankingUserBookCount userBookCount = rankingService.getBookListCountByUser(user);
 		
 		model.addAttribute("listBookCount", listBookCount);

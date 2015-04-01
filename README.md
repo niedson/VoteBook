@@ -9,4 +9,4 @@ Projeto disponível nos seguintes servidores:
 
 AWS: http://54.94.238.187:8080/vote-no-livro
 
-Heroku: http://n597.herokuapp.com
+Heroku: http://n598.herokuapp.com
