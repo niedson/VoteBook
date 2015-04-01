@@ -62,9 +62,7 @@ public class BookController {
 				voteBookHistService.updateVoteBookSetSelectedBook(voteBookHist, selectedBookId);
 			} else {
 				BookListId returnBookListVoteAgain = (BookListId) request.getSession().getAttribute("currentVoteBook");
-				// Enviar mensagem para o usuário informando qu	e
-				// 	ele terá que o voto foi invalido e tera q votar novamente
-				// return new ModelAndView("book/choose", "bookList", returnBookListVoteAgain);
+				request.getSession().setAttribute("errorMessage", "O seu voto não é válido por motivos de segurança. Por favor, vote novamente.");
 			}
 		}
 		
@@ -74,6 +72,7 @@ public class BookController {
 			request.getSession().removeAttribute("bookListProbability");
 			return new ModelAndView("redirect:/user/register", "", null);
 		}
+		
 		
 		return getTwoBooksForVoting(request, bookListProbability);
 	}

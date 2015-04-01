@@ -44,8 +44,12 @@
 	            <div class="row">
 	                <div class="col-sm-12 whos-behind">
 	                    <h3>Vote no Livro</h3>
+	                    
 	                    <p>
 	                    	Selecione o melhor livro na sua opinião.
+	                    </p>
+	                    <p>
+	                    	Restam ${ bookListProbability.size() + 1 } votos
 	                    </p>
 	                </div>
 	            </div>
@@ -65,10 +69,10 @@
 				                </div>
 			                </div>
 						</c:forEach>
-		            	
 		            	<!-- Book FOR - End -->
 
 		            </div>
+				<div class="error-message" style="color: whitesmoke;" >${ errorMessage }</div>
 				</form>
 	        </div>
         </div>
