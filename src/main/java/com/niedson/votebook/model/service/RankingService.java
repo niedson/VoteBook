@@ -13,7 +13,6 @@ import com.niedson.votebook.to.RankingUserBookCount;
 @Service
 public class RankingService {
 	
-	
 	private RankingDAO rankingDAO;
 	
 	@Autowired
@@ -28,6 +27,5 @@ public class RankingService {
     public RankingUserBookCount getBookListCountByUser(User user){
     	return rankingDAO.getBookListCountByUser(user);
     }
-
 	
 }

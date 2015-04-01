@@ -38,23 +38,7 @@ public class BookService {
 	public Book get(Long id) {
 		return bookDAO.get(id);
 	}
-	
-	public List<BookListId> getNextBookPair(List<BookListId> bookListProbabilitySession) {
-		List<BookListId> bookListProbability = new ArrayList<BookListId>();
-		if (bookListProbabilitySession == null) {
-			List<Book> bookList = this.listAll();
-			while (bookList.size() > 1) {
-				Book book = bookList.remove(0);
-				for (Book bookInList : bookList) {
-					BookListId bookListId = new BookListId(book.getId(), bookInList.getId());
-					bookListProbability.add(bookListId);
-				}
-			}
-		} else {
-			bookListProbability = bookListProbabilitySession;
-		}
-		return bookListProbability;
-	}
+
 	
 	public List<BookListId> createListWithAllProbabilityVoting() {
 		List<BookListId> bookListProbability = new ArrayList<BookListId>();
