@@ -36,44 +36,67 @@ public class BookController {
 		this.voteBookHistService = voteBookHistService;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value={ProjectURIConstants.BookController.CHOOSE_BOOK, "/"})
 	public ModelAndView voteBook(HttpServletRequest request){
+		List<BookListId> bookListProbability = (List<BookListId>) request.getSession().getAttribute("bookListProbability"); 
 		
-		Random gerador = new Random();
+		boolean isFirstVote = (bookListProbability == null);
+		if(isFirstVote){
+			bookListProbability = bookService.createListWithAllProbabilityVoting();
+			request.getSession().setAttribute("bookListProbability", bookListProbability);
+		}
 		
-		long voteBookHistId = request.getParameter("voteBookHistId") == null ? 0 : Long.valueOf(request.getParameter("voteBookHistId"));
+		boolean userCurrentVoting = (request.getParameter("voteBookHistId") == null);
+		String selectedBookIdString = request.getParameter("selectedBookId");
+		if(userCurrentVoting == false && selectedBookIdString != null){
+			Long voteBookHistId = Long.parseLong(request.getParameter("voteBookHistId"));
+			long selectedBookId = Long.parseLong(selectedBookIdString);
+			VoteBookHist voteBookHist = voteBookHistService.get(voteBookHistId);
+			
+			String currentSessionId = request.getSession().getId();
+			boolean isValidVoteForCurrentSession = voteBookHist.getSessionId() == currentSessionId 
+													&& (voteBookHist.getFirstBook().getId() == selectedBookId 
+														|| voteBookHist.getSecondBook().getId() == selectedBookId);
+			if(isValidVoteForCurrentSession){
+				voteBookHistService.updateVoteBookSetSelectedBook(voteBookHist, selectedBookId);
+			} else {
+				BookListId returnBookListVoteAgain = (BookListId) request.getSession().getAttribute("currentVoteBook");
+				// Enviar mensagem para o usuário informando qu	e
+				// 	ele terá que o voto foi invalido e tera q votar novamente
+				// return new ModelAndView("book/choose", "bookList", returnBookListVoteAgain);
+			}
+		}
 		
-		List<BookListId> bookListProbabilitySession = (List<BookListId>) request.getSession().getAttribute("bookListProbability");
-		VoteBookHist voteBookHistSession = voteBookHistService.get(voteBookHistId);
-		String selectedBookId = request.getParameter("selectedBookId");
 		
-		voteBookHistService.updateVoteBookSetSelectedBook(voteBookHistSession, selectedBookId);
-		
-		List<BookListId> bookListProbability  = bookService.getNextBookPair(bookListProbabilitySession);
-		
-		if (bookListProbability.size() == 0) {
+		boolean isVotingInAllProbabilitys = bookListProbability.isEmpty();
+		if (isVotingInAllProbabilitys) {
 			request.getSession().removeAttribute("bookListProbability");
 			return new ModelAndView("redirect:/user/register", "", null);
-		} else {
-			
-			int index = gerador.nextInt( bookListProbability.size());
-			BookListId  bookListProbabilityChosed = bookListProbability.remove(index);
-			
-			List<Book> selectedBooks = new ArrayList<Book>();
-			Book firstBookId = bookService.get(bookListProbabilityChosed.getFirstBookId());
-			Book secondBookId = bookService.get(bookListProbabilityChosed.getSecondBookId());
-
-			selectedBooks.add(bookService.get(firstBookId.getId()));
-			selectedBooks.add(bookService.get(secondBookId.getId()));
-			
-			VoteBookHist voteBookHist = voteBookHistService.save(new VoteBookHist(firstBookId, secondBookId, 
-					null, new Date(), request.getSession().getId(), null));
-			
-			request.getSession().setAttribute("bookListProbability", bookListProbability);
-			request.getSession().setAttribute("voteBookHist", voteBookHist);
-			
-			return new ModelAndView("book/choose", "bookList", selectedBooks);
 		}
+		
+		return getTwoBooksForVoting(request, bookListProbability);
+	}
+
+	private ModelAndView getTwoBooksForVoting(HttpServletRequest request, List<BookListId> bookListProbability) {
+		int index = new Random().nextInt( bookListProbability.size() );
+		BookListId bookListProbabilityChosed = bookListProbability.remove(index);
+		request.getSession().setAttribute("currentVoteBook", bookListProbabilityChosed);
+		
+		List<Book> selectedBooks = new ArrayList<Book>();
+		Book firstBookId = bookService.get(bookListProbabilityChosed.getFirstBookId());
+		Book secondBookId = bookService.get(bookListProbabilityChosed.getSecondBookId());
+
+		selectedBooks.add(bookService.get(firstBookId.getId()));
+		selectedBooks.add(bookService.get(secondBookId.getId()));
+		
+		VoteBookHist voteBookHist = voteBookHistService.save(new VoteBookHist(firstBookId, secondBookId, 
+				null, new Date(), request.getSession().getId(), null));
+		
+		request.getSession().setAttribute("bookListProbability", bookListProbability);
+		request.getSession().setAttribute("voteBookHist", voteBookHist);
+		
+		return new ModelAndView("book/choose", "bookList", selectedBooks);
 	}
 
 

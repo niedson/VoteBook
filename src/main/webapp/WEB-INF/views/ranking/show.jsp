@@ -107,16 +107,12 @@
 				</div>
 			</c:forEach>
 			<div class="col-sm-12 col-md-12 col-lg-12">
-			<div class="top-button">
-            	<a class="button-1" href="${pageContext.request.contextPath}/book/choose">
-            		Votar Novamente
-            	</a>
-            </div>
-			
+				<div class="top-button">
+	            	<a class="button-1" href="${pageContext.request.contextPath}/book/choose">
+	            		Votar Novamente
+	            	</a>
+	            </div>
 			</div>
-		<div class="row">
-			<a href="${pageContext.request.contextPath}/book/choose" class="btn">Votar Novamente</a>		
-		</div>
 		</div>
 
 	</div>

@@ -54,9 +54,9 @@ public class VoteBookHistService {
 	}
 	 
 	public void updateVoteBookSetSelectedBook(VoteBookHist voteBookHistSession,
-		String selectedBookId) {
+		Long selectedBookId) {
 		if (!(voteBookHistSession == null)) {
-			Book choosedBook = (selectedBookId == null) ? null : bookService.get(Long.valueOf(selectedBookId));
+			Book choosedBook = (selectedBookId == null) ? null : bookService.get(selectedBookId);
 			voteBookHistSession.setChoosedBook(choosedBook);
 			voteBookHistSession.setDateHourVote(new Date());
 			this.update(voteBookHistSession);

@@ -56,4 +56,17 @@ public class BookService {
 		return bookListProbability;
 	}
 	
+	public List<BookListId> createListWithAllProbabilityVoting() {
+		List<BookListId> bookListProbability = new ArrayList<BookListId>();
+		List<Book> bookList = this.listAll();
+		while (bookList.size() > 1) {
+			Book book = bookList.remove(0);
+			for (Book bookInList : bookList) {
+				BookListId bookListId = new BookListId(book.getId(), bookInList.getId());
+				bookListProbability.add(bookListId);
+			}
+		}
+		return bookListProbability;
+	}
+	
 }
