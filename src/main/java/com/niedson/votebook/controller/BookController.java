@@ -39,25 +39,35 @@ public class BookController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value={ProjectURIConstants.BookController.CHOOSE_BOOK, "/"})
 	public ModelAndView voteBook(HttpServletRequest request){
+		
+		logger.debug("Entering " + ProjectURIConstants.BookController.CHOOSE_BOOK + "/");
+		
 		List<BookListId> bookListProbability = (List<BookListId>) request.getSession().getAttribute("bookListProbability"); 
 		
 		boolean isFirstVote = (bookListProbability == null);
 		if(isFirstVote){
+			logger.debug("isFirstVote: " + isFirstVote);
 			bookListProbability = bookService.createListWithAllProbabilityVoting();
 			request.getSession().setAttribute("bookListProbability", bookListProbability);
 		}
 		
 		boolean userCurrentVoting = (request.getParameter("voteBookHistId") == null);
 		String selectedBookIdString = request.getParameter("selectedBookId");
+		logger.debug("selectedBookIdString: " + selectedBookIdString);
+		logger.debug("userCurrentVoting: " + userCurrentVoting);
 		if(userCurrentVoting == false && selectedBookIdString != null){
-			Long voteBookHistId = Long.parseLong(request.getParameter("voteBookHistId"));
-			long selectedBookId = Long.parseLong(selectedBookIdString);
-			VoteBookHist voteBookHist = voteBookHistService.get(voteBookHistId);
 			
+			Long voteBookHistId = Long.parseLong(request.getParameter("voteBookHistId"));
+			logger.debug("userCurrentVoting" + userCurrentVoting);
+			long selectedBookId = Long.parseLong(selectedBookIdString);
+			logger.debug("selectedBookId: " + selectedBookId);
+			VoteBookHist voteBookHist = voteBookHistService.get(voteBookHistId);
+			logger.debug("voteBookHistId: " + voteBookHist.getId());
 			String currentSessionId = request.getSession().getId();
 			boolean isValidVoteForCurrentSession = voteBookHist.getSessionId() == currentSessionId 
 													&& (voteBookHist.getFirstBook().getId() == selectedBookId 
 														|| voteBookHist.getSecondBook().getId() == selectedBookId);
+			logger.debug("isValidVoteForCurrentSession: " + isValidVoteForCurrentSession);
 			if(isValidVoteForCurrentSession){
 				voteBookHistService.updateVoteBookSetSelectedBook(voteBookHist, selectedBookId);
 			} else {

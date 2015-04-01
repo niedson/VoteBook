@@ -43,7 +43,7 @@ public class ListenerStartStopServer implements ServletContextListener{
 
 	}
 	
-	private void loadBookList() {
+	public void loadBookList() {
 		
 		logger.info("Loading table book");
 
