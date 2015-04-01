@@ -59,9 +59,8 @@
 			<div class="row">
 				<div class="col-sm-12 whos-behind">
 					<h3>Vote no Livro</h3>
-
 					<p>Selecione o melhor livro na sua opinião.</p>
-					<p>Restam ${ bookListProbability.size() + 1 } votos</p>
+					<p>Resta<c:if test="${bookListProbability.size() > 0 }">m</c:if> ${ bookListProbability.size() + 1 } voto<c:if test="${bookListProbability.size() > 0 }">s</c:if></p>
 				</div>
 			</div>
 			<form action="choose" method="post">
