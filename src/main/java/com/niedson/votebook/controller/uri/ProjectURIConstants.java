@@ -17,6 +17,5 @@ public class ProjectURIConstants {
 		public static final String PREFIX_MAPPING = "/ranking";
 		public static final String SHOW = "/show";
 	}
-	
 
 }
