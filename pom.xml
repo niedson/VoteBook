@@ -243,5 +243,5 @@
     </plugins>		
     
 	</build>
-	<!-- http://devcrumb.com/hibernate/hibernate-jpa-spring-and-hsqldb -->
+
 </project>
